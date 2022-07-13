@@ -1,40 +1,8 @@
 package study.datajpa.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import study.datajpa.entity.Team;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.Optional;
+public interface TeamRepository extends JpaRepository<Team, Long> {  //JpaRepository를 상속하면 @Repository 어노테이션을 하지 않아도 된다.
 
-@Repository
-public class TeamRepository {
-
-    @PersistenceContext
-    private EntityManager em;
-
-    public Team save(Team team) {
-        em.persist(team);
-        return team;
-    }
-
-    public void delete(Team team) {
-        em.remove(team);
-    }
-
-    public List<Team> findAll() {
-        return em.createQuery("select t from Team t", Team.class)
-                .getResultList();
-    }
-
-    public Optional<Team> findById(Long id) {
-        Team team = em.find(Team.class, id);  //변수명 바꾸기 단축기 -> shift + F6
-        return Optional.ofNullable(team);
-    }
-
-    public long count() {
-        return em.createQuery("select count(t) from Team t", Long.class)
-                .getSingleResult();
-    }
 }
