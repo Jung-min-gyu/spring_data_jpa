@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(false)
 class MemberRepositoryTest {
 
     @Autowired
@@ -71,7 +71,7 @@ class MemberRepositoryTest {
         memberRepository.save(m1);
         memberRepository.save(m2);
 
-        List<Member> result = memberRepository.findByUsernameAndAgeGreaterThen("AAA", 15);
+        List<Member> result = memberRepository.findByUsernameAndAgeGreaterThan("AAA", 15);
 
         assertThat(result.get(0).getUsername()).isEqualTo("AAA");
         assertThat(result.get(0).getAge()).isEqualTo(20);

@@ -2,6 +2,8 @@ package study.datajpa.repository;
 
 import org.apache.catalina.LifecycleState;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import study.datajpa.entity.Member;
 
 import java.util.List;
@@ -10,5 +12,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {  //인�
 
 //    List<Member> findByUsername(String username);  //굳이 구현하지 않아도 동작한다!! 이게 바로 query method 방식.
 
-    List<Member> findByUsernameAndAgeGreaterThen(String username, int age);
+    List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
+
+    @Query(name = "Member.findByUsername")
+    List<Member> findByUsername(@Param("username") String username);
 }
