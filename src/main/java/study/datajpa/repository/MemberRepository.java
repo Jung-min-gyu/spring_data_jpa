@@ -1,6 +1,8 @@
 package study.datajpa.repository;
 
 import org.apache.catalina.LifecycleState;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,4 +37,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {  //인�
     List<Member> findListByUsername(String username); //컬렉션
     Member findMemberByUsername(String username); //단건
     Optional<Member> findOptionalByUsername(String username);  //단건 Optional
+
+    Page<Member> findByAge(int age, Pageable pageable);
 }
